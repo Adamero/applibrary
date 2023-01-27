@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Library</string>
+    <string name="form_name">Name</string>
+    <string name="form_surname">Surname</string>
+    <string name="save_author">SAVE AUTHOR</string>
+    <string name="author_lastname">Author LastName</string>
+    <string name="author_firstname">Author FirstName</string>
+    <string name="author_id">Id</string>
+    <string name="view">View</string>
+    <string name="book">Book:</string>
+</resources>

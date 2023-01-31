@@ -40,16 +40,21 @@ public class BookAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return Long.parseLong(books.get(position).getId());
+        try {
+            return Long.parseLong(books.get(position).getId());
+        } catch (NumberFormatException e) {
+            return 0;
+        }
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if(convertView == null){
+        if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.book_list, parent, false);
         }
         nameText = convertView.findViewById(R.id.nameText);
         nameText.setText(books.get(position).getTitle());
+        System.out.println(books.get(position).getCreated());
         viewButton = convertView.findViewById(R.id.viewButton);
         viewButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +67,7 @@ public class BookAdapter extends BaseAdapter {
 
     private void callDetail(String id) {
         Intent intent = new Intent(context, DetailActivity.class);
-        intent.putExtra("id",id);
+        intent.putExtra("id", id);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
 

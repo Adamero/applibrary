@@ -18,27 +18,6 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".activities.EditActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".activities.BookForm"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".activities.DetailActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -52,7 +31,37 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".AuthorListActivity"
+            android:name=".activities.EditActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".activities.BookForm"
+            android:exported="true"
+            android:parentActivityName=".activities.BookList">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".activities.DetailActivity"
+            android:exported="false"
+            android:parentActivityName=".activities.BookList">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".activities.BookList"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".activities.AuthorListActivity"
             android:exported="true"
             android:label="Authors list">
             <meta-data
@@ -60,10 +69,10 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".AuthorsForm"
+            android:name=".activities.AuthorsForm"
             android:exported="true"
             android:label="Create new Author"
-            android:parentActivityName=".AuthorListActivity">
+            android:parentActivityName=".activities.AuthorListActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

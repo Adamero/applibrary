@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:clickable="true"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
@@ -46,5 +47,6 @@
         app:layout_constraintTop_toBottomOf="@+id/authorsListItem_lastname"
         android:background="#C2C2C2"
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"/>
+        android:layout_height="0.5dp"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

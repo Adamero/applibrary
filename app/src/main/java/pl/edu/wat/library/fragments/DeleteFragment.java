@@ -18,7 +18,7 @@ public class DeleteFragment extends DialogFragment {
     private String id;
     private DeleteInterface deleteInterface;
 
-    public DeleteFragment(String message, String id, DeleteInterface deleteInterface){
+    public DeleteFragment(String message, String id, DeleteInterface deleteInterface) {
         this.message = message;
         this.id = id;
         this.deleteInterface = deleteInterface;

@@ -14,11 +14,9 @@ import android.widget.Toast;
 
 import java.time.LocalDateTime;
 
-import pl.edu.wat.library.MainActivity;
 import pl.edu.wat.library.R;
 import pl.edu.wat.library.dto.BookRequest;
 import pl.edu.wat.library.entity.Book;
-import pl.edu.wat.library.retrofit.AuthorApi;
 import pl.edu.wat.library.retrofit.BookApi;
 import pl.edu.wat.library.retrofit.RetrofitService;
 import retrofit2.Call;
@@ -31,6 +29,9 @@ public class BookForm extends AppCompatActivity {
     EditText descriptionText;
     EditText authorIdText;
     Button createButton;
+    Button nameAuthorId;
+    String selectedAuthorId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,12 @@ public class BookForm extends AppCompatActivity {
         descriptionText = findViewById(R.id.nameDescriptionText);
         authorIdText = findViewById(R.id.nameAuthorIdText);
         createButton = findViewById(R.id.createButton);
+        nameAuthorId = findViewById(R.id.nameAuthorId);
+
+        selectedAuthorId = getIntent().getStringExtra("author_id");
+        authorIdText.setText(selectedAuthorId);
+
+
         titleText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -73,17 +80,21 @@ public class BookForm extends AppCompatActivity {
 
             }
         });
+
+
         createButton.setEnabled(buttonEnabled());
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BookRequest bookRequest = new BookRequest(titleText.getText().toString(),descriptionText.getText().toString(),authorIdText.getText().toString(), LocalDateTime.now());
+
+                BookRequest bookRequest = new BookRequest(titleText.getText().toString(), descriptionText.getText().toString(), authorIdText.getText().toString(), LocalDateTime.now());
                 create(bookRequest);
             }
         });
+
     }
 
-    private void create(BookRequest bookRequest){
+    private void create(BookRequest bookRequest) {
         RetrofitService retrofitService = new RetrofitService();
         BookApi bookApi = retrofitService.getRetrofit().create(BookApi.class);
 
@@ -91,7 +102,7 @@ public class BookForm extends AppCompatActivity {
         call.enqueue(new Callback<Book>() {
             @Override
             public void onResponse(Call<Book> call, Response<Book> response) {
-                if(!response.isSuccessful()) {
+                if (!response.isSuccessful()) {
                     Toast.makeText(getApplicationContext(), response.message(), Toast.LENGTH_LONG).show();
                     Log.e("Response err:", response.message());
                     return;
@@ -105,17 +116,26 @@ public class BookForm extends AppCompatActivity {
             public void onFailure(Call<Book> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
                 Log.e("Response err:", t.getMessage());
+
             }
         });
+
     }
 
     private void callMain() {
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        Intent intent = new Intent(getApplicationContext(), BookList.class);
         startActivity(intent);
     }
 
-    private boolean buttonEnabled(){
+    private boolean buttonEnabled() {
         return titleText.getText().toString().trim().length() > 0 && descriptionText.getText().toString().trim().length() > 0 && authorIdText.getText().toString().trim().length() > 0;
     }
+
+    public void onChooseAuthorButtonClick(View view) {
+        Intent intent = new Intent(this, AuthorListActivity.class);
+        startActivity(intent);
+
+    }
+
 
 }

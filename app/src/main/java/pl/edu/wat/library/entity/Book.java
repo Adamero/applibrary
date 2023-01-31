@@ -18,7 +18,7 @@ public class Book implements Serializable {
     private String description;
     private String author;
     private List<String> type;
-    private LocalDateTime dateTime;
+    private String dateTime;
 
     public String getId() {
         return id;
@@ -44,7 +44,7 @@ public class Book implements Serializable {
         this.type = type;
     }
 
-    public void setCreated(LocalDateTime dateTime) {
+    public void setCreated(String dateTime) {
         this.dateTime = dateTime;
     }
 
@@ -64,7 +64,7 @@ public class Book implements Serializable {
         return type;
     }
 
-    public LocalDateTime getCreated() {
+    public String getCreated() {
         //Calendar calendar = Calendar.getInstance();
         //return calendar.getTime();
         return dateTime;
@@ -75,7 +75,7 @@ public class Book implements Serializable {
                 String description,
                 String author,
                 List<String> type,
-                LocalDateTime dateTime) {
+                String dateTime) {
         this.title = title;
         this.description = description;
         this.author = author;

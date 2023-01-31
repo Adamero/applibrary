@@ -1,7 +1,6 @@
 package pl.edu.wat.library.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
@@ -12,11 +11,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.sql.Date;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
-import pl.edu.wat.library.MainActivity;
 import pl.edu.wat.library.R;
 import pl.edu.wat.library.entity.Book;
 import pl.edu.wat.library.fragments.DeleteFragment;
@@ -26,7 +20,6 @@ import pl.edu.wat.library.retrofit.RetrofitService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class DetailActivity extends AppCompatActivity implements DeleteInterface {
 
@@ -71,7 +64,7 @@ public class DetailActivity extends AppCompatActivity implements DeleteInterface
         call.enqueue(new Callback<Book>() {
             @Override
             public void onResponse(Call<Book> call, Response<Book> response) {
-                if(!response.isSuccessful()) {
+                if (!response.isSuccessful()) {
                     Toast.makeText(getApplicationContext(), response.message(), Toast.LENGTH_LONG).show();
                     Log.e("Response err:", response.message());
                     return;
@@ -80,9 +73,8 @@ public class DetailActivity extends AppCompatActivity implements DeleteInterface
                 idText.setText(String.valueOf(book.getId()));
                 titleText.setText(String.valueOf(book.getTitle()));
                 descriptionText.setText(String.valueOf(book.getDescription()));
-                dataText.setText(String.valueOf(book.getCreated()));
+                dataText.setText(book.getCreated());
                 System.out.println(book.getCreated());
-
 
 
             }
@@ -118,13 +110,12 @@ public class DetailActivity extends AppCompatActivity implements DeleteInterface
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                if(!response.isSuccessful()) {
+                if (!response.isSuccessful()) {
                     Toast.makeText(getApplicationContext(), response.message(), Toast.LENGTH_LONG).show();
                     Log.e("Response err:", response.message());
                     return;
                 }
-                //book = response.body();
-                Toast.makeText(getApplicationContext(), book.getTitle() + "deleted!!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), book.getTitle() + " deleted!!", Toast.LENGTH_LONG).show();
                 callMain();
             }
 
@@ -136,10 +127,8 @@ public class DetailActivity extends AppCompatActivity implements DeleteInterface
         });
     }
 
-    private void callMain(){
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+    private void callMain() {
+        Intent intent = new Intent(getApplicationContext(), BookList.class);
         startActivity(intent);
     }
-
-
 }

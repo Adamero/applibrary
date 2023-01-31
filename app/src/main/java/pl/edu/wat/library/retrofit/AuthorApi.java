@@ -17,6 +17,4 @@ public interface AuthorApi {
     @Headers("Content-Type: application/json")
     @POST("api/v1/author/add")
     Call<Author> save(@Body Author author);
-
-
 }

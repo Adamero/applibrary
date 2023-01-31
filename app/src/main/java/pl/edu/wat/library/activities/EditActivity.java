@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import pl.edu.wat.library.MainActivity;
 import pl.edu.wat.library.R;
 import pl.edu.wat.library.dto.BookRequest;
 import pl.edu.wat.library.entity.Book;
@@ -83,7 +82,7 @@ public class EditActivity extends AppCompatActivity {
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BookRequest bookRequest = new BookRequest(editTitle.getText().toString(),editDescription.getText().toString(),editAuthorId.getText().toString(),null);
+                BookRequest bookRequest = new BookRequest(editTitle.getText().toString(), editDescription.getText().toString(), editAuthorId.getText().toString(), null);
                 edit(bookRequest);
             }
         });
@@ -97,7 +96,7 @@ public class EditActivity extends AppCompatActivity {
         call.enqueue(new Callback<Book>() {
             @Override
             public void onResponse(Call<Book> call, Response<Book> response) {
-                if(!response.isSuccessful()) {
+                if (!response.isSuccessful()) {
                     Toast.makeText(getApplicationContext(), response.message(), Toast.LENGTH_LONG).show();
                     Log.e("Response err:", response.message());
                     return;
@@ -109,18 +108,18 @@ public class EditActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Book> call, Throwable t) {
-                Toast.makeText(EditActivity.this,"Failed to load Authors",Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditActivity.this, "Failed to load Authors", Toast.LENGTH_SHORT).show();
                 System.out.println(t);
             }
         });
     }
 
     private void callMain() {
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        Intent intent = new Intent(getApplicationContext(), BookList.class);
         startActivity(intent);
     }
 
-    private boolean buttonEnabled(){
+    private boolean buttonEnabled() {
         return editTitle.getText().toString().trim().length() > 0 && editDescription.getText().toString().trim().length() > 0 && editAuthorId.getText().toString().trim().length() > 0;
     }
 

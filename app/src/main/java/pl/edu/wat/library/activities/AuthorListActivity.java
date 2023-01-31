@@ -1,7 +1,6 @@
-package pl.edu.wat.library;
+package pl.edu.wat.library.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,6 +12,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
+import pl.edu.wat.library.R;
 import pl.edu.wat.library.adapter.AuthorAdapter;
 import pl.edu.wat.library.entity.Author;
 import pl.edu.wat.library.retrofit.AuthorApi;
@@ -24,6 +24,7 @@ import retrofit2.Response;
 public class AuthorListActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,8 @@ public class AuthorListActivity extends AppCompatActivity {
         });
 
         loadAuthors();
+
+
     }
 
     private void loadAuthors() {
@@ -50,18 +53,23 @@ public class AuthorListActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<List<Author>> call, Response<List<Author>> response) {
                         populateListView(response.body());
+
                     }
 
                     @Override
                     public void onFailure(Call<List<Author>> call, Throwable t) {
-                        Toast.makeText(AuthorListActivity.this,"Failed to load Authors",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AuthorListActivity.this, "Failed to load Authors", Toast.LENGTH_SHORT).show();
                     }
                 });
+
+
     }
 
     private void populateListView(List<Author> authorList) {
         AuthorAdapter authorAdapter = new AuthorAdapter(authorList);
+
         recyclerView.setAdapter(authorAdapter);
+
     }
 
 

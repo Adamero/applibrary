@@ -13,21 +13,24 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:layout_marginTop="20dp"
-        android:hint="book title"/>
+        android:hint="book title"
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/nameDescriptionText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:hint="book description"/>
+        android:hint="book description"
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/nameAuthorIdText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:hint="book author_id"/>
+        android:hint="book author_id"
+        android:minHeight="48dp" />
 
     <Button
         android:id="@+id/editButton"
